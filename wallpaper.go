@@ -2,15 +2,16 @@ package bing_wallpaper
 
 import (
 	"fmt"
-	"github.com/beevik/etree"
 	"io/ioutil"
 	"net/http"
 	"time"
+
+	"github.com/beevik/etree"
 )
 
 const (
-	bingURL = `https://cn.bing.com`
-	bingAPI = `https://cn.bing.com/HPImageArchive.aspx?format=xml&idx=%d&n=1&mkt=%s`
+	bingURL = `https://www.bing.com`
+	bingAPI = `https://www.bing.com/HPImageArchive.aspx?format=xml&idx=%d&n=1&mkt=%s`
 )
 
 var (
@@ -55,7 +56,7 @@ func Get(index uint, market, resolution string) (*Response, error) {
 	if err != nil {
 		return nil, err
 	}
-	request.Header.Add("Referer", "https://cn.bing.com")
+	request.Header.Add("Referer", bingURL)
 	request.Header.Add("User-Agent", `Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 10.0; WOW64; Trident/8.0; .NET4.0C; .NET4.0E)`)
 
 	resp, err := client.Do(request)
@@ -66,7 +67,7 @@ func Get(index uint, market, resolution string) (*Response, error) {
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return nil, fmt.Errorf("failed to parse request body from cn.bing.com")
+		return nil, fmt.Errorf("failed to parse request body from %s", bingURL)
 	}
 
 	doc := etree.NewDocument()
