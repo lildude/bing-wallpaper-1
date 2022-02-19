@@ -30,7 +30,7 @@ func init() {
 		"zh-CN": true,
 		"ja-JP": true,
 		"en-AU": true,
-		"en-UK": true,
+		"en-GB": true,
 		"de-DE": true,
 		"en-NZ": true,
 		"en-CA": true,
